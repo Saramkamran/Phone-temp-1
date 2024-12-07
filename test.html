@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Menu</title>
+    <style>
+        /* Basic styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .Header--LeftContainer {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #333;
+        }
+
+        .Header--Link {
+            color: white;
+            text-decoration: none;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .Header--Link img {
+            display: block;
+        }
+
+        .Header--Link--Menu__Close {
+            display: none; /* Initially hidden */
+        }
+
+        /* Dropdown menu styles */
+        .dropdown-menu1 {
+            position: absolute;
+            top: 50px; /* Adjust as needed */
+            left: 10px; /* Align with the button */
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            list-style: none;
+            margin: 0;
+            display: none; /* Initially hidden */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-menu1 li {
+            padding: 5px 10px;
+        }
+
+        .dropdown-menu1 li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dropdown-menu1 a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="Header--LeftContainer">
+        <a href="#" aria-label="Menu" class="Header--Link Header--Link--Menu Header--Link--Menu__Open">
+            <img style="width: 50%;" src="menu.png" alt="Menu">
+        </a>
+        <a href="#" aria-label="Close Menu"
+            class="Header--Link Header--Link--Menu Header--Link--Menu__Close">
+            <span class="label Header--Link--Text">Close</span>
+        </a>
+    </div>
+
+    <!-- Dropdown menu -->
+    <ul class="dropdown-menu1" id="dropdownMenu">
+        <li><a href="#!">Option 1</a></li>
+        <li><a href="#!">Option 2</a></li>
+        <li><a href="#!">Option 3</a></li>
+    </ul>
+
+    <script>
+        // JavaScript to toggle dropdown menu
+        const menuOpen = document.querySelector('.Header--Link--Menu__Open');
+        const menuClose = document.querySelector('.Header--Link--Menu__Close');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        // Show dropdown menu when "Menu" is clicked
+        menuOpen.addEventListener('click', (e) => {
+            e.preventDefault();
+            dropdownMenu.style.display = 'block';
+            menuOpen.style.display = 'none';
+            menuClose.style.display = 'block';
+        });
+
+        // Hide dropdown menu when "Close" is clicked
+        menuClose.addEventListener('click', (e) => {
+            e.preventDefault();
+            dropdownMenu.style.display = 'none';
+            menuOpen.style.display = 'block';
+            menuClose.style.display = 'none';
+        });
+
+        // Hide dropdown if clicked outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.Header--LeftContainer') && !e.target.closest('.dropdown-menu')) {
+                dropdownMenu.style.display = 'none';
+                menuOpen.style.display = 'block';
+                menuClose.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
